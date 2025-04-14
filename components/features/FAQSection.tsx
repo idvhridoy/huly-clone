@@ -100,7 +100,7 @@ export default function FAQSection() {
                 <button
                   onClick={() => toggleExpand(index)}
                   className="flex items-center justify-between w-full px-6 py-4 text-left"
-                  aria-expanded={expandedIndex === index}
+                  aria-expanded={expandedIndex === index ? "true" : "false"}
                 >
                   <span className="font-medium">{faq.question}</span>
                   <motion.div

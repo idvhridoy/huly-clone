@@ -111,7 +111,7 @@ export default function CodeEditorDemo() {
             See the <span className="gradient-text">Future</span> of Coding
           </h2>
           <p className="text-lg text-foreground/70">
-            Experience MyCyberBase's intelligent suggestions, real-time error detection,
+            Experience MyCyberBase&apos;s intelligent suggestions, real-time error detection,
             and productivity-enhancing features in action.
           </p>
         </div>

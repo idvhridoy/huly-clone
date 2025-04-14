@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Terminal, Code, Zap } from "lucide-react";
@@ -27,7 +26,7 @@ export default function Hero() {
     let currentLineIndex = 0;
     let currentCharIndex = 0;
     let typingInterval: NodeJS.Timeout;
-
+    
     const typeNextChar = () => {
       if (currentLineIndex >= lines.length) {
         clearInterval(typingInterval);
@@ -35,29 +34,22 @@ export default function Hero() {
       }
 
       const currentLine = lines[currentLineIndex];
-      if (currentCharIndex === 0) {
-        const lineElement = document.createElement("div");
-        lineElement.className = "terminal-line";
-        element.appendChild(lineElement);
-      }
-
-      const lineElements = element.querySelectorAll(".terminal-line");
-      const currentLineElement = lineElements[currentLineIndex];
-      
       if (currentCharIndex < currentLine.length) {
-        currentLineElement.textContent = 
-          currentLine.substring(0, currentCharIndex + 1);
+        element.innerHTML = `${lines.slice(0, currentLineIndex).join("<br>")}${currentLineIndex > 0 ? "<br>" : ""}${currentLine.substring(0, currentCharIndex + 1)}<span class="cursor">_</span>`;
         currentCharIndex++;
       } else {
-        currentCharIndex = 0;
         currentLineIndex++;
-        // Add a small pause before starting the next line
-        setTimeout(typeNextChar, 500);
-        return;
+        currentCharIndex = 0;
+        
+        // Add delay between lines
+        clearInterval(typingInterval);
+        setTimeout(() => {
+          typingInterval = setInterval(typeNextChar, 50);
+        }, 400);
       }
     };
 
-    typingInterval = setInterval(typeNextChar, 40);
+    typingInterval = setInterval(typeNextChar, 50);
 
     return () => clearInterval(typingInterval);
   }, []);
